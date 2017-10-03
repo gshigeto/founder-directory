@@ -7,8 +7,17 @@
 //
 
 import UIKit
+import Foundation
 
 class ProfileController : UITableViewController {
+    
+    // Mark: - Constants
+    private struct HelpText {
+        static let no_phone = "No phone listed"
+        static let no_email = "No email listed"
+        static let no_spouse = "No spouse listed"
+        static let no_business_profile = "No business profile"
+    }
     
     // Mark: - Properties
     var founder: Founder!
@@ -51,35 +60,37 @@ class ProfileController : UITableViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        style()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
         fillProfile()
-        styleButtons()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        profileImage.applyCircleMask()
-        profileImage.applyBorder()
     }
     
     // Mark: - Private Helpers
     private func fillProfile() {
+        profileImage.image = UIImage(named: String(founder.photo))
         founderName.text = founder.name
         founderCompany.text = founder.company_name
         if !founder.phone_listed {
-            // Hide the phone number
+            founderPhone.textLabel?.text = HelpText.no_phone
+            textButton.isEnabled = false
+            callButton.isEnabled = false
+        } else {
+            founderPhone.textLabel?.text = founder.phone
         }
-        founderPhone.textLabel?.text = founder.phone
         if !founder.email_listed {
-            // Hide the email
+            founderEmail.textLabel?.text = HelpText.no_email
+            emailButton.isEnabled = false
+        } else {
+            founderEmail.textLabel?.text = founder.email
         }
-        founderEmail.textLabel?.text = founder.email
-        founderSpouseName.textLabel?.text = founder.spouse_name == "" ? "No Spouse Listed" : founder.spouse_name
-        founderBusinessProfile.textLabel?.text = founder.business_profile
-        
-        profileImage.image = UIImage(named: String(founder.photo))
+        founderSpouseName.textLabel?.text = founder.spouse_name == "" ? HelpText.no_spouse : founder.spouse_name
+        founderBusinessProfile.textLabel?.text = founder.business_profile == "" ? HelpText.no_business_profile : founder.business_profile
     }
     
     private func performAction(url: URL) {
@@ -91,13 +102,12 @@ class ProfileController : UITableViewController {
         }
     }
     
-    private func styleButtons() {
-        textButton.layer.cornerRadius = textButton.bounds.size.width / 2
-        textButton.clipsToBounds = true
-        callButton.layer.cornerRadius = callButton.bounds.size.width / 2
-        callButton.clipsToBounds = true
-        emailButton.layer.cornerRadius = emailButton.bounds.size.width / 2
-        emailButton.clipsToBounds = true
+    private func style() {
+        profileImage.applyCircleMask()
+        profileImage.applyBorder()
+        textButton.applyCircle()
+        callButton.applyCircle()
+        emailButton.applyCircle()
     }
     
     // Mark: - Segue

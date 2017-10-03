@@ -8,13 +8,6 @@
 
 import UIKit
 
-class Helper {
-    static func applyRoundBorder(to imageView: UIImageView) {
-        imageView.layer.cornerRadius = imageView.frame.size.width / 2
-        imageView.layer.masksToBounds = true
-    }
-}
-
 extension UIImageView {
     func applyCircleMask() {
         layer.cornerRadius = bounds.width / 2
@@ -24,5 +17,12 @@ extension UIImageView {
     func applyBorder() {
         layer.borderColor = UIColor.gray.cgColor
         layer.borderWidth = 1.0
+    }
+}
+
+extension UIButton {
+    func applyCircle() {
+        layer.cornerRadius = bounds.size.width / 2
+        clipsToBounds = true
     }
 }

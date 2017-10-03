@@ -56,10 +56,8 @@ class FounderDeck {
         
         if let savedFounders = defaults.data(forKey: Defaults.founders.rawValue),
             let foundersList = NSKeyedUnarchiver.unarchiveObject(with: savedFounders) as? [Founder] {
-            foundersList.forEach({print($0.name)})
             founders = foundersList
         } else {
-            print("here2")
             preBuiltFounders()
         }
         buildLetterDictionary()

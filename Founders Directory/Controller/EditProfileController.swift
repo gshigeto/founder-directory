@@ -8,9 +8,16 @@
 
 import UIKit
 
-class EditProfileController : UITableViewController {
+class EditProfileController : UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // Mark: - Constants
+    private struct ActionSheet {
+        static let title = "Select Image From"
+        static let camera = "Camera"
+        static let library = "Library"
+        static let cancel = "Cancel"
+    }
+    
     private struct Storyboard {
         static let ShowProfileSegueIdentifier = "ShowProfile"
     }
@@ -48,9 +55,20 @@ class EditProfileController : UITableViewController {
     }
     
     @IBAction func updatePhoto(_ sender: UIButton) {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-//        presentViewController(imagePicker, animated: true, completion: nil)
+        let actionSheet = UIAlertController(title: ActionSheet.title, message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: ActionSheet.camera, style: .default, handler: {
+            (action: UIAlertAction) -> Void in
+            self.choosePhoto(UIImagePickerControllerSourceType.camera)
+        }))
+        actionSheet.addAction(UIAlertAction(title: ActionSheet.library, style: .default, handler: {
+            (action: UIAlertAction) -> Void in
+            self.choosePhoto(UIImagePickerControllerSourceType.photoLibrary)
+        }))
+        actionSheet.addAction(UIAlertAction(title: ActionSheet.cancel, style: .cancel , handler: {
+            (action: UIAlertAction) -> Void in
+            actionSheet.dismiss(animated: true, completion: nil)
+        }))
+        self.present(actionSheet, animated: true, completion: nil)
     }
     
     // Mark: - View Controller Lifecycle
@@ -59,6 +77,14 @@ class EditProfileController : UITableViewController {
         founderPhoto.applyCircleMask()
         founderPhoto.applyBorder()
         fillProfile()
+    }
+    
+    // Mark: - Image Picker Delegate Lifecycle
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            founderPhoto.image = pickedImage
+        }
+        dismiss(animated: true, completion: nil)
     }
     
     // Mark: - Private Helpers
@@ -71,8 +97,15 @@ class EditProfileController : UITableViewController {
         founderEmailListed.isOn = founder.email_listed
         founderSpouse.text = founder.spouse_name
         founderBusinessProfile.text = founder.business_profile
-        
         founderPhoto.image = UIImage(named: String(founder.photo))
+    }
+    
+    private func choosePhoto(_ location: UIImagePickerControllerSourceType) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = location
+        imagePicker.allowsEditing = false
+        present(imagePicker, animated: true, completion: nil)
     }
     
     private func saveProfile() {

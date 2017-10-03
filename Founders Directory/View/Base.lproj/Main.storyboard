@@ -148,9 +148,8 @@
                                                 <constraint firstItem="TSM-IE-dup" firstAttribute="trailing" secondItem="U2Y-mJ-pG5" secondAttribute="trailingMargin" id="LfT-mJ-0VD"/>
                                                 <constraint firstItem="cpg-OV-t13" firstAttribute="top" secondItem="U2Y-mJ-pG5" secondAttribute="top" constant="20" id="Oh8-H3-jM7"/>
                                                 <constraint firstItem="X98-V6-UUK" firstAttribute="centerX" secondItem="U2Y-mJ-pG5" secondAttribute="centerX" id="Q6L-HY-ZXP"/>
-                                                <constraint firstItem="X98-V6-UUK" firstAttribute="top" secondItem="FrL-t7-KZD" secondAttribute="bottom" constant="8" symbolic="YES" id="S9z-tw-gxu"/>
+                                                <constraint firstItem="X98-V6-UUK" firstAttribute="top" secondItem="FrL-t7-KZD" secondAttribute="bottom" constant="8" id="S9z-tw-gxu"/>
                                                 <constraint firstItem="cpg-OV-t13" firstAttribute="centerX" secondItem="U2Y-mJ-pG5" secondAttribute="centerX" id="Y0u-gC-FLg"/>
-                                                <constraint firstItem="15p-3M-YT3" firstAttribute="top" secondItem="FrL-t7-KZD" secondAttribute="bottom" constant="8.0000000000000284" id="e0B-B5-JwE"/>
                                                 <constraint firstItem="TSM-IE-dup" firstAttribute="leading" secondItem="U2Y-mJ-pG5" secondAttribute="leadingMargin" id="moo-fO-LdU"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="X98-V6-UUK" secondAttribute="bottom" constant="-5.3333333333333428" id="uMv-1C-Nfc"/>
                                             </constraints>
@@ -243,10 +242,6 @@
                                 </cells>
                             </tableViewSection>
                         </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="ev1-fM-oiL" id="avu-DG-MsA"/>
-                            <outlet property="delegate" destination="ev1-fM-oiL" id="kXs-7G-2I6"/>
-                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="vIE-N9-RFq">
                         <barButtonItem key="leftBarButtonItem" title="Directory" id="KPc-DC-NkH">
@@ -296,10 +291,10 @@
             </objects>
             <point key="canvasLocation" x="1115.2" y="122.66009852216749"/>
         </scene>
-        <!--Profile-->
+        <!--Edit Profile-->
         <scene sceneID="j0e-e3-UVP">
             <objects>
-                <tableViewController title="Profile" id="iq2-Zh-G6n" customClass="EditProfileController" customModule="Founders_Directory" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Edit Profile" id="iq2-Zh-G6n" customClass="EditProfileController" customModule="Founders_Directory" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HNo-v5-dec">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -321,21 +316,21 @@
                                                         <constraint firstAttribute="height" constant="100" id="vlS-th-Mav"/>
                                                     </constraints>
                                                 </imageView>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Company" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bjZ-8E-elL">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bjZ-8E-elL">
                                                     <rect key="frame" x="87.666666666666686" y="180" width="200" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="4En-LE-9Q1"/>
                                                         <constraint firstAttribute="height" constant="30" id="OUo-q2-Cgi"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="i7v-Vo-zj9"/>
                                                     </constraints>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FwF-jM-1Qk">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FwF-jM-1Qk">
                                                     <rect key="frame" x="87.666666666666686" y="140" width="200" height="30"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="Ivc-BR-Sjn"/>
                                                         <constraint firstAttribute="height" constant="30" id="YEc-45-v5O"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="ykY-SP-Pc4"/>
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -353,9 +348,13 @@
                                                 <constraint firstAttribute="trailing" secondItem="mhI-uM-GLc" secondAttribute="trailing" constant="78" id="8dv-xV-34j"/>
                                                 <constraint firstItem="mhI-uM-GLc" firstAttribute="centerY" secondItem="cCJ-Ge-mFw" secondAttribute="centerY" id="AJ9-Ak-lBt"/>
                                                 <constraint firstItem="bjZ-8E-elL" firstAttribute="centerX" secondItem="0Kt-E7-zVR" secondAttribute="centerX" id="FFN-Hy-dh3"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="FwF-jM-1Qk" secondAttribute="trailing" constant="20" id="Gqy-j5-vpp"/>
+                                                <constraint firstItem="bjZ-8E-elL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0Kt-E7-zVR" secondAttribute="leadingMargin" constant="20" id="Kyy-1s-8Dy"/>
                                                 <constraint firstItem="bjZ-8E-elL" firstAttribute="top" secondItem="FwF-jM-1Qk" secondAttribute="bottom" constant="10" id="LEy-6d-qCe"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="bjZ-8E-elL" secondAttribute="trailing" constant="20" id="MvI-yL-nS5"/>
                                                 <constraint firstItem="mhI-uM-GLc" firstAttribute="leading" secondItem="cCJ-Ge-mFw" secondAttribute="trailing" constant="30" id="UfD-71-VZT"/>
                                                 <constraint firstItem="FwF-jM-1Qk" firstAttribute="top" secondItem="cCJ-Ge-mFw" secondAttribute="bottom" constant="20" id="YXQ-fW-YQR"/>
+                                                <constraint firstItem="FwF-jM-1Qk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0Kt-E7-zVR" secondAttribute="leadingMargin" constant="20" id="hx9-Fo-NG6"/>
                                                 <constraint firstItem="cCJ-Ge-mFw" firstAttribute="top" secondItem="0Kt-E7-zVR" secondAttribute="top" constant="20" id="io0-Zv-5Bj"/>
                                                 <constraint firstItem="FwF-jM-1Qk" firstAttribute="centerX" secondItem="0Kt-E7-zVR" secondAttribute="centerX" id="jpb-Xn-0Oh"/>
                                                 <constraint firstItem="cCJ-Ge-mFw" firstAttribute="centerX" secondItem="0Kt-E7-zVR" secondAttribute="centerX" id="v4D-Bq-RBh"/>
@@ -374,7 +373,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="exL-7Y-zmm">
-                                                    <rect key="frame" x="20" y="-0.66666666666666785" width="335.33333333333331" height="45.333333333333329"/>
+                                                    <rect key="frame" x="20" y="-0.33333333333333215" width="335.33333333333331" height="45.333333333333329"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="2mx-Ov-10R"/>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="sYG-dF-hKs"/>
@@ -440,10 +439,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="osa-hn-xOw">
-                                                    <rect key="frame" x="20" y="-0.66666666666666785" width="335.33333333333331" height="45.333333333333329"/>
+                                                    <rect key="frame" x="20" y="-0.33333333333333215" width="335.33333333333331" height="45.333333333333329"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="HHO-6N-NCx"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="cET-dR-jQA"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="l5d-N7-WYi"/>
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -506,7 +505,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Spouse Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rOK-I3-dwf">
-                                                    <rect key="frame" x="20" y="-0.66666666666666785" width="335.33333333333331" height="45.333333333333329"/>
+                                                    <rect key="frame" x="20" y="-0.33333333333333215" width="335.33333333333331" height="45.333333333333329"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="9Aq-mp-OUN"/>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="T53-jQ-2vF"/>
