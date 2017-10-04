@@ -73,17 +73,21 @@ class ProfileController : UITableViewController {
     
     // Mark: - Private Helpers
     private func fillProfile() {
-        profileImage.image = UIImage(named: String(founder.photo))
+        if let decodedData = Data(base64Encoded: founder.photo, options: .ignoreUnknownCharacters) {
+            profileImage.image = UIImage(data: decodedData)
+        } else {
+            profileImage.image = UIImage(named: String(founder.photo))
+        }
         founderName.text = founder.name
         founderCompany.text = founder.company_name
-        if !founder.phone_listed {
+        if !founder.phone_listed || founder.phone == "" {
             founderPhone.textLabel?.text = HelpText.no_phone
             textButton.isEnabled = false
             callButton.isEnabled = false
         } else {
             founderPhone.textLabel?.text = founder.phone
         }
-        if !founder.email_listed {
+        if !founder.email_listed || founder.email == "" {
             founderEmail.textLabel?.text = HelpText.no_email
             emailButton.isEnabled = false
         } else {
@@ -91,6 +95,9 @@ class ProfileController : UITableViewController {
         }
         founderSpouseName.textLabel?.text = founder.spouse_name == "" ? HelpText.no_spouse : founder.spouse_name
         founderBusinessProfile.textLabel?.text = founder.business_profile == "" ? HelpText.no_business_profile : founder.business_profile
+        if !founder.editable {
+            self.navigationItem.rightBarButtonItem = nil
+        }
     }
     
     private func performAction(url: URL) {

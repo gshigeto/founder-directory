@@ -26,3 +26,11 @@ extension UIButton {
         clipsToBounds = true
     }
 }
+
+extension UIImage {
+    public func base64() -> String? {
+        var imageData: Data?
+        imageData = UIImagePNGRepresentation(self)
+        return imageData?.base64EncodedString()
+    }
+}

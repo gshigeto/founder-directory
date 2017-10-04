@@ -21,6 +21,7 @@ class Founder : NSObject, NSCoding {
         static let spouse_name = "spouse_name"
         static let business_profile = "business_profile"
         static let photo = "photo"
+        static let editable = "editable"
     }
     
     // Mark: - Properties
@@ -33,10 +34,24 @@ class Founder : NSObject, NSCoding {
     var spouse_name: String
     var business_profile: String
     var photo: String
+    var editable: Bool
     
     // Mark: - Initialization
+    override init() {
+        self.name = ""
+        self.company_name = ""
+        self.phone = ""
+        self.phone_listed = true
+        self.email = ""
+        self.email_listed = true
+        self.spouse_name = ""
+        self.business_profile = ""
+        self.photo = ""
+        self.editable = false
+    }
+    
     init(name: String, company_name: String, phone: String, phone_listed: Bool = true, email: String, email_listed: Bool = true,
-         spouse_name: String = "", business_profile: String = "", photo: String) {
+         spouse_name: String = "", business_profile: String = "", photo: String, editable: Bool = false) {
         self.name = name
         self.company_name = company_name
         self.phone = phone
@@ -46,6 +61,7 @@ class Founder : NSObject, NSCoding {
         self.spouse_name = spouse_name
         self.business_profile = business_profile
         self.photo = photo
+        self.editable = editable
     }
     
     // Mark: - Decoder
@@ -59,6 +75,7 @@ class Founder : NSObject, NSCoding {
         self.spouse_name = decoder.decodeObject(forKey: Founder.spouse_name) as? String ?? ""
         self.business_profile = decoder.decodeObject(forKey: Founder.business_profile) as? String ?? ""
         self.photo = decoder.decodeObject(forKey: Founder.photo) as? String ?? ""
+        self.editable = decoder.decodeBool(forKey: Founder.editable)
     }
     
     // Mark: - Encoder
@@ -72,5 +89,6 @@ class Founder : NSObject, NSCoding {
         coder.encode(spouse_name, forKey: Founder.spouse_name)
         coder.encode(business_profile, forKey: Founder.business_profile)
         coder.encode(photo, forKey: Founder.photo)
+        coder.encode(editable, forKey: Founder.editable)
     }
 }

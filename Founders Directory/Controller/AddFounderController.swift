@@ -1,14 +1,14 @@
 //
-//  EditProfileController.swift
+//  AddFounderController.swift
 //  Founders Directory
 //
-//  Created by Gavin Nitta on 9/29/17.
+//  Created by Gavin Nitta on 10/4/17.
 //  Copyright © 2017 Gavin Nitta. All rights reserved.
 //
 
 import UIKit
 
-class EditProfileController : UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddFounderController : UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // Mark: - Constants
     private struct ActionSheet {
@@ -19,14 +19,11 @@ class EditProfileController : UITableViewController, UIImagePickerControllerDele
     }
     
     private struct Storyboard {
-        static let ShowProfileSegueIdentifier = "ShowProfile"
+        static let ShowDirectorySegueIdentifier = "ShowDirectory"
     }
     
     // Mark: - Properties
-    var founder: Founder!
-    let imagePicker = UIImagePickerController()
-    var emailListed: Bool = true
-    var phoneListed: Bool = true
+    var founder: Founder = Founder()
     
     // Mark: - Outlets
     @IBOutlet weak var founderPhoto: UIImageView!
@@ -40,21 +37,7 @@ class EditProfileController : UITableViewController, UIImagePickerControllerDele
     @IBOutlet weak var founderBusinessProfile: UITextView!
     
     // Mark: - Actions
-    @IBAction func listEmail(_ sender: UISwitch) {
-        emailListed = sender.isOn
-    }
-    
-    @IBAction func listPhone(_ sender: UISwitch) {
-        phoneListed = sender.isOn
-    }
-    
-    @IBAction func saveProfile(_ sender: Any) {
-        saveProfile()
-        FounderDeck.sharedInstance.saveFounders()
-        performSegue(withIdentifier: Storyboard.ShowProfileSegueIdentifier, sender: self)
-    }
-    
-    @IBAction func updatePhoto(_ sender: UIButton) {
+    @IBAction func uploadPhoto(_ sender: UIButton) {
         let actionSheet = UIAlertController(title: ActionSheet.title, message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: ActionSheet.camera, style: .default, handler: {
             (action: UIAlertAction) -> Void in
@@ -71,12 +54,18 @@ class EditProfileController : UITableViewController, UIImagePickerControllerDele
         self.present(actionSheet, animated: true, completion: nil)
     }
     
+    @IBAction func save(_ sender: UIBarButtonItem) {
+        saveProfile()
+        FounderDeck.sharedInstance.founders.append(founder)
+        FounderDeck.sharedInstance.saveFounders()
+        performSegue(withIdentifier: Storyboard.ShowDirectorySegueIdentifier, sender: self)
+    }
+    
     // Mark: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         founderPhoto.applyCircleMask()
         founderPhoto.applyBorder()
-        fillProfile()
     }
     
     // Mark: - Image Picker Delegate Lifecycle
@@ -88,23 +77,6 @@ class EditProfileController : UITableViewController, UIImagePickerControllerDele
     }
     
     // Mark: - Private Helpers
-    private func fillProfile() {
-        founderName.text = founder.name
-        founderCompany.text = founder.company_name
-        founderPhone.text = founder.phone
-        founderPhoneListed.isOn = founder.phone_listed
-        founderEmail.text = founder.email
-        founderEmailListed.isOn = founder.email_listed
-        founderSpouse.text = founder.spouse_name
-        founderBusinessProfile.text = founder.business_profile
-        if let decodedData = Data(base64Encoded: founder.photo, options: .ignoreUnknownCharacters) {
-            founderPhoto.image = UIImage(data: decodedData)
-        } else {
-            founderPhoto.image = UIImage(named: String(founder.photo))
-        }
-        
-    }
-    
     private func choosePhoto(_ location: UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -125,5 +97,4 @@ class EditProfileController : UITableViewController, UIImagePickerControllerDele
         let newImage = UIImagePNGRepresentation(founderPhoto.image!)!
         founder.photo = newImage.base64EncodedString()
     }
-    
 }
