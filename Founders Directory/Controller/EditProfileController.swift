@@ -51,6 +51,7 @@ class EditProfileController : UITableViewController, UIImagePickerControllerDele
     @IBAction func saveProfile(_ sender: Any) {
         saveProfile()
         FounderDeck.sharedInstance.saveFounders()
+        FounderDeck.sharedInstance.buildLetterDictionary()
         performSegue(withIdentifier: Storyboard.ShowProfileSegueIdentifier, sender: self)
     }
     

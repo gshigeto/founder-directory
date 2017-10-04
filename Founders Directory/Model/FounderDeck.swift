@@ -27,20 +27,14 @@ class FounderDeck {
     }
     
     // Mark: - Public Helpers
-    public func saveFounders() {
-        let defaults = UserDefaults.standard
-        let encodedData = NSKeyedArchiver.archivedData(withRootObject: founders)
-        defaults.set(encodedData, forKey: Defaults.founders.rawValue)
-        defaults.synchronize()
-    }
-
-    // Mark: - Private Helpers
-    private func buildLetterDictionary() {
+    public func buildLetterDictionary() {
         sortFounders()
+        foundersDictionary.removeAll(keepingCapacity: false)
+        letters = []
         for founder in founders {
             var arr = founder.name.split{$0 == " "}
             let last_name = arr[arr.count - 1]
-
+            
             let letter = String(last_name[last_name.startIndex])
             if foundersDictionary[letter] == nil {
                 foundersDictionary[letter] = [founder]
@@ -51,6 +45,14 @@ class FounderDeck {
         }
     }
     
+    public func saveFounders() {
+        let defaults = UserDefaults.standard
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: founders)
+        defaults.set(encodedData, forKey: Defaults.founders.rawValue)
+        defaults.synchronize()
+    }
+
+    // Mark: - Private Helpers
     private func loadFounders() {
         let defaults = UserDefaults.standard
         
@@ -82,12 +84,12 @@ class FounderDeck {
     private func sortFounders() {
         founders.sort{
             var arr1 = $0.name.split{$0 == " "}
-            let ln1 = arr1[arr1.count - 1]
+            let lastName1 = arr1[arr1.count - 1]
             
             var arr2 = $1.name.split{$0 == " "}
-            let ln2 = arr2[arr2.count - 1]
+            let lastName2 = arr2[arr2.count - 1]
             
-            return ln1[ln1.startIndex] < ln2[ln2.startIndex]
+            return lastName1 < lastName2
         }
     }
 }
